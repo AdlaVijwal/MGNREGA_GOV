@@ -1,0 +1,13 @@
+export default {
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        saffron: "#FF9933",
+        "india-green": "#138808",
+        "india-blue": "#000080",
+      },
+    },
+  },
+  plugins: [],
+};
