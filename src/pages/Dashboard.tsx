@@ -42,22 +42,23 @@ export default function Dashboard() {
         .order("month", { ascending: true });
 
       if (dataError) throw dataError;
-      setData(mgnregaData || []);
+
+      // supabase response typing can be loose here; cast to our known type
+      const rows = (mgnregaData ?? []) as MgnregaData[];
+      setData(rows);
 
       // If we have data, set the district info
-      if (mgnregaData && mgnregaData.length > 0) {
+      if (rows.length > 0) {
+        const first = rows[0];
         setDistrict({
           id: districtId,
-          name: mgnregaData[0].district_name,
-          state: mgnregaData[0].state_name,
+          name: first.district_name,
+          state: first.state_name,
           latitude: null,
           longitude: null,
           created_at: new Date().toISOString(),
         });
       }
-
-      if (dataError) throw dataError;
-      setData(mgnregaData || []);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
